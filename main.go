@@ -39,16 +39,19 @@ func main() {
 		fmt.Scan(&weigh)
 		fmt.Println("¿Qué altura tienes? (descalzo) ")
 		fmt.Scan(&tall)
-		fmt.Println(bmi.Bmi(weigh, tall))
+		message, bmi := bmi.Bmi(weigh, tall)
+		messageBmi := fmt.Sprintf("Ahora mismo tu IMC es %f", bmi)
+		fmt.Println(messageBmi)
+		fmt.Println(message)
 	case "mario":
 		for {
 			var pyramidHeight int
 			fmt.Print("Altura de la piramide:")
 			fmt.Scan(&pyramidHeight)
-			if pyramidHeight < 1 || pyramidHeight > 8 {
-				continue
-			} else {
-				fmt.Println(mario.Mario(pyramidHeight))
+			pyramid, err := mario.Mario(pyramidHeight)
+
+			if err == nil {
+				fmt.Println(pyramid)
 				break
 			}
 		}

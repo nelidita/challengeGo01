@@ -1,27 +1,22 @@
 package mario
 
-func Mario(num int) string {
-	pyramid := ""
+import (
+	"errors"
+	"strings"
+)
 
-	for i := 1; i <= num; i++ {
-		hash := ""
-		spaces := ""
-		line := ""
-		// Imprime espacios en blanco a la izquierda
-		for j := 1; j <= num-i; j++ {
-			spaces += " "
+func Mario(num int) (string, error) {
+	var pyramid string
+	if num < 1 || num > 8 {
+		return "", errors.New("escoge un numero valido")
+	} else {
+		for i := 1; i <= num; i++ {
+			var hash, spaces, line string
+			spaces = strings.Repeat(" ", num-i)
+			hash = strings.Repeat("#", i)
+			line = spaces + hash + "\n"
+			pyramid += line
 		}
-
-		// Imprime "#" en la pirámide
-		for k := 1; k <= i; k++ {
-			hash += "#"
-		}
-
-		// Imprime cada linea
-		line = spaces + hash + "\n"
-
-		//Concatena cada linea y crea la piramide
-		pyramid += line
+		return pyramid, nil
 	}
-	return pyramid
 }
